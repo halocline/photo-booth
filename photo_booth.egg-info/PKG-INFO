@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: photo-booth
+Version: 0.0.1
+Summary: raspberry pi based photo booth
+Home-page: https://github.com/halocline/photo-booth
+Author: Matt Glissmann
+Author-email: mdglissmann@gmail.com
+License: UNKNOWN
+Description: # photo-booth
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

@@ -1,0 +1,8 @@
+README.md
+setup.py
+booth/__init__.py
+booth/booth.py
+photo_booth.egg-info/PKG-INFO
+photo_booth.egg-info/SOURCES.txt
+photo_booth.egg-info/dependency_links.txt
+photo_booth.egg-info/top_level.txt
