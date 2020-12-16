@@ -60,13 +60,16 @@ class Booth:
             board.led.state = Led.ON
             for color in colors:
                 leds.update(Leds.rgb_on(color))
-                time.sleep(0.5)
+                time.sleep(0.25)
             TonePlayer(22).play(*[
                 'Be',
                 'rs',
                 'C5e',
                 'rs',
                 'D5e',
+            ])
+            TonePlayer(22).play(*[
+                'E','E','E','rs','E','E','E','rs','E','G','C','D','E','rs','rs','rs', 
             ])
             board.led.state = Led.OFF
 
