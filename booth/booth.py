@@ -1,3 +1,4 @@
+import datetime
 import time
 
 from gpiozero import OutputDevice, Buzzer, LED
@@ -39,6 +40,21 @@ class Booth:
                 time.sleep(0.25)
             TonePlayer(22).play(*jingleBells(6))
             board.led.state = Led.OFF
+
+    def menu(self):
+        print('Press Arcade Button to begin photo shoot.' + '\n')
+        with Board() as board, Leds() as leds:
+            board.button.wait_for_press()
+            pressTime = datetime.datetime.now()
+            board.led.state = Led.ON
+            print('LED is on...')
+
+            leds.update(Leds.rgb_on((107, 255, 0)))
+            self.shoot()
+            board.button.wait_for_release()
+            releaseTime = datetime.datetime.now()
+            board.led.state = Led.OFF
+            print('OFF')
 
     def shoot(self):
         countdown = self.initial_timing
