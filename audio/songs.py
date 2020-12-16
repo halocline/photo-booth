@@ -18,6 +18,7 @@ def jingleBells(octave=4):
         'Cw'  # sleigh
     ]
 
-    nextNotes = list(map(lambda note: note + str(octave), notes))
+    nextNotes = list(
+        map(lambda note: note[:1] + str(octave) + note[1:], notes))
 
     return nextNotes
