@@ -2,6 +2,10 @@ import time
 
 from gpiozero import OutputDevice, Buzzer, LED
 
+from aiy.board import Board, Led
+from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
+from aiy.toneplayer import TonePlayer
+
 
 def byeScreen():
     print('      .      ')
@@ -49,7 +53,7 @@ class Booth:
     def welcome(self):
         welcomeScreen(self.name)
 
-    def startup():
+    def startup(self):
         with Board() as board, Leds() as leds:
             colors = [Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN,
                       Color.BLUE, Color.PURPLE, Color.BLACK, Color.WHITE]
@@ -88,5 +92,5 @@ class Booth:
         print('\n' + 'You looked FABULOUS!!!' + '\n')
         time.sleep(3)
 
-    def bye():
+    def bye(self):
         byeScreen()
