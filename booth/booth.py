@@ -6,6 +6,8 @@ from aiy.board import Board, Led
 from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
 from aiy.toneplayer import TonePlayer
 
+from audio import jingleBells
+
 
 def byeScreen():
     print('      .      ')
@@ -69,8 +71,9 @@ class Booth:
                 'D5e',
             ])
             TonePlayer(22).play(*[
-                'E','E','E','rs','E','E','E','rs','E','G','C','D','E','rs','rs','rs', 
+                'E', 'E', 'E', 'rs', 'E', 'E', 'E', 'rs', 'E', 'G', 'C', 'D', 'E', 'rs', 'rs', 'rs',
             ])
+            TonePlayer(22).play(jingleBells)
             board.led.state = Led.OFF
 
     def shoot(self):
