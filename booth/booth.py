@@ -44,17 +44,41 @@ class Booth:
     def menu(self):
         print('Press Arcade Button to begin photo shoot.' + '\n')
         with Board() as board, Leds() as leds:
-            board.button.wait_for_press()
-            pressTime = datetime.datetime.now()
-            board.led.state = Led.ON
-            print('LED is on...')
+            while True:
+                board.button.wait_for_press()
+                pressTime = datetime.datetime.now()
+                board.led.state = Led.ON
+                print('LED is on...')
 
-            leds.update(Leds.rgb_on((107, 255, 0)))
-            self.shoot()
-            board.button.wait_for_release()
-            releaseTime = datetime.datetime.now()
-            board.led.state = Led.OFF
-            print('OFF')
+                leds.update(Leds.rgb_on((107, 255, 0)))
+                self.shoot()
+                leds.update(Leds.rgb_on((255, 255, 255)))
+                print('Press Arcade Button to start again' + '\n' + 'OR....' +
+                      '\n' + 'Press and HOLD the Arcade Button for 5 seconds to quit')
+                board.button.wait_for_release()
+                releaseTime = datetime.datetime.now()
+                board.led.state = Led.OFF
+                print('OFF')
+
+                pressDuration = releaseTime - pressTime
+                print('Photo booth session ran for ' +
+                      str(pressDuration.seconds) + ' seconds')
+                if pressDuration.seconds >= 5:
+                    leds.update(Leds.rgb_on(Color.PURPLE))
+                    time.sleep(3)
+                    TonePlayer(22).play(*[
+                        'D5e',
+                        'rq',
+                        'C5e',
+                        'rq',
+                        'Be',
+                        'rq',
+                        'Be',
+                        'C5e',
+                        'D5e'
+                    ])
+                    break
+                print('Done')
 
     def shoot(self):
         countdown = self.initial_timing
