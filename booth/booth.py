@@ -63,17 +63,6 @@ class Booth:
             for color in colors:
                 leds.update(Leds.rgb_on(color))
                 time.sleep(0.25)
-            TonePlayer(22).play(*[
-                'Be',
-                'rs',
-                'C5e',
-                'rs',
-                'D5e',
-            ])
-            TonePlayer(22).play(*[
-                'E', 'E', 'E', 'rs', 'E', 'E', 'E', 'rs', 'E', 'G', 'C', 'D', 'E', 'rs', 'rs', 'rs',
-            ])
-            print(jingleBells())
             TonePlayer(22).play(*jingleBells())
             board.led.state = Led.OFF
 
