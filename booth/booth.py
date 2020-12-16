@@ -49,6 +49,23 @@ class Booth:
     def welcome(self):
         welcomeScreen(self.name)
 
+    def startup():
+        with Board() as board, Leds() as leds:
+            colors = [Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN,
+                      Color.BLUE, Color.PURPLE, Color.BLACK, Color.WHITE]
+            board.led.state = Led.ON
+            for color in colors:
+                leds.update(Leds.rgb_on(color))
+                time.sleep(0.5)
+            TonePlayer(22).play(*[
+                'Be',
+                'rs',
+                'C5e',
+                'rs',
+                'D5e',
+            ])
+            board.led.state = Led.OFF
+
     def shoot(self):
         countdown = self.initial_timing
         shots_remaining = self.num_shots
@@ -70,4 +87,6 @@ class Booth:
             shots_remaining -= 1
         print('\n' + 'You looked FABULOUS!!!' + '\n')
         time.sleep(3)
+
+    def bye():
         byeScreen()
