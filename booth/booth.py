@@ -46,6 +46,8 @@ class Booth:
         with Board() as board, Leds() as leds:
             while True:
                 # pulse LED to indicate ready state
+                leds.pattern = Pattern.blink(1000)
+                leds.update(Leds.rgb_pattern(WHITE))
                 board.button.wait_for_press()
                 startTime = datetime.datetime.now()
                 board.led.state = Led.ON
@@ -53,7 +55,8 @@ class Booth:
                 # update LED to green indicating shoot is live
                 leds.update(Leds.rgb_on((107, 255, 0)))
                 self.shoot()
-                leds.update(Leds.rgb_on((255, 255, 255)))
+                leds.pattern = Pattern.blink(1000)
+                leds.update(Leds.rgb_pattern(WHITE))
                 print('Press Arcade Button to start again' + '\n' + 'OR....' +
                       '\n' + 'Press and HOLD the Arcade Button for 5 seconds to quit')
                 board.button.wait_for_press()
