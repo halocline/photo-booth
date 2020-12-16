@@ -1,4 +1,4 @@
-def jingleBells():
+def jingleBells(octave=4):
     notes = [
         'E', 'E', 'Eh',  # jin-gle bells
         'E', 'E', 'Eh',  # jin-gle bells
@@ -17,4 +17,7 @@ def jingleBells():
         'G', 'G', 'F', 'D',  # in a one-horse open
         'Cw'  # sleigh
     ]
-    return notes
+
+    nextNotes = map(lambda note: note + octave, notes)
+
+    return nextNotes
