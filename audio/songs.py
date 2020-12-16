@@ -19,6 +19,8 @@ def jingleBells(octave=4):
     ]
 
     nextNotes = list(
-        map(lambda note: note[:1] + str(octave) + note[1:], notes))
+        map(lambda note:
+            note if note[:1] == 'r'
+            else note[:1] + str(octave) + note[1:], notes))
 
     return nextNotes
