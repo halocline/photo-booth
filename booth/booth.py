@@ -7,33 +7,34 @@ from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
 from aiy.toneplayer import TonePlayer
 
 from audio.songs import jingleBells
+from screens.cli_transitions import byeScreen, welcomeScreen
 
 
-def byeScreen():
-    print('      .      ')
-    print('      :      ')
-    print('\'.___/*\___.\'')
-    print('  \* \ / */  ')
-    print('   >--X--<   ')
-    print('  /*_/ \_*\  ')
-    print('.\'   \* /   \'.')
-    print('      :      ')
-    print('      \'      ')
-    print('\n')
-    print('Merry Christmas!' + '\n' + '\n')
+# def byeScreen():
+#     print('      .      ')
+#     print('      :      ')
+#     print('\'.___/*\___.\'')
+#     print('  \* \ / */  ')
+#     print('   >--X--<   ')
+#     print('  /*_/ \_*\  ')
+#     print('.\'   \* /   \'.')
+#     print('      :      ')
+#     print('      \'      ')
+#     print('\n')
+#     print('Merry Christmas!' + '\n' + '\n')
 
 
-def welcomeScreen(name):
-    print('\n' + '   *      *   ')
-    print('   _\/  \/_   ')
-    print('    _\/\/_    ')
-    print('_\_\_\/\/_/_/_')
-    print(' / /_/\/\_\ \ ')
-    print('    _/\/\_    ')
-    print('    /\  /\    ')
-    print('   *      *   ')
-    print('Season\'s Greetings!' + '\n' + '\n')
-    print('Welcome to ' + name + '\n' + '\n')
+# def welcomeScreen(name):
+#     print('\n' + '   *      *   ')
+#     print('   _\/  \/_   ')
+#     print('    _\/\/_    ')
+#     print('_\_\_\/\/_/_/_')
+#     print(' / /_/\/\_\ \ ')
+#     print('    _/\/\_    ')
+#     print('    /\  /\    ')
+#     print('   *      *   ')
+#     print('Season\'s Greetings!' + '\n' + '\n')
+#     print('Welcome to ' + name + '\n' + '\n')
 
 
 class Booth:
@@ -63,9 +64,7 @@ class Booth:
             for color in colors:
                 leds.update(Leds.rgb_on(color))
                 time.sleep(0.25)
-            print(jingleBells())
-            print(jingleBells(3))
-            TonePlayer(22).play(*jingleBells(5))
+            TonePlayer(22).play(*jingleBells(6))
             board.led.state = Led.OFF
 
     def shoot(self):
