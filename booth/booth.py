@@ -6,35 +6,8 @@ from aiy.board import Board, Led
 from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
 from aiy.toneplayer import TonePlayer
 
-from audio.songs import jingleBells
-from screens.cli_transitions import byeScreen, welcomeScreen
-
-
-# def byeScreen():
-#     print('      .      ')
-#     print('      :      ')
-#     print('\'.___/*\___.\'')
-#     print('  \* \ / */  ')
-#     print('   >--X--<   ')
-#     print('  /*_/ \_*\  ')
-#     print('.\'   \* /   \'.')
-#     print('      :      ')
-#     print('      \'      ')
-#     print('\n')
-#     print('Merry Christmas!' + '\n' + '\n')
-
-
-# def welcomeScreen(name):
-#     print('\n' + '   *      *   ')
-#     print('   _\/  \/_   ')
-#     print('    _\/\/_    ')
-#     print('_\_\_\/\/_/_/_')
-#     print(' / /_/\/\_\ \ ')
-#     print('    _/\/\_    ')
-#     print('    /\  /\    ')
-#     print('   *      *   ')
-#     print('Season\'s Greetings!' + '\n' + '\n')
-#     print('Welcome to ' + name + '\n' + '\n')
+from assets.songs import jingleBells
+from assets.cli_transitions import byeScreen, welcomeScreen
 
 
 class Booth:
