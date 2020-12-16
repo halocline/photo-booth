@@ -45,26 +45,30 @@ class Booth:
         print('Press Arcade Button to begin photo shoot.' + '\n')
         with Board() as board, Leds() as leds:
             while True:
+                # pulse LED to indicate ready state
                 board.button.wait_for_press()
-                pressTime = datetime.datetime.now()
+                startTime = datetime.datetime.now()
                 board.led.state = Led.ON
                 print('LED is on...')
-
+                # update LED to green indicating shoot is live
                 leds.update(Leds.rgb_on((107, 255, 0)))
                 self.shoot()
                 leds.update(Leds.rgb_on((255, 255, 255)))
                 print('Press Arcade Button to start again' + '\n' + 'OR....' +
                       '\n' + 'Press and HOLD the Arcade Button for 5 seconds to quit')
+                board.button.wait_for_press()
+                pressTime = datetime.datetime.now()
                 board.button.wait_for_release()
                 releaseTime = datetime.datetime.now()
                 board.led.state = Led.OFF
                 print('OFF')
 
                 pressDuration = releaseTime - pressTime
-                print('Photo booth session ran for ' +
-                      str(pressDuration.seconds) + ' seconds')
+                sessionDuration = releaseTime - startTime
                 if pressDuration.seconds >= 5:
                     leds.update(Leds.rgb_on(Color.PURPLE))
+                    print('Photo booth session ran for ' +
+                          str(sessionDuration.seconds) + ' seconds')
                     time.sleep(3)
                     TonePlayer(22).play(*[
                         'D5e',
