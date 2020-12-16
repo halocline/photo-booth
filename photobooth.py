@@ -8,7 +8,7 @@ def main():
     with Booth(event_name, 4, 3) as booth:
         booth.startup()
         booth.welcome()
-        # booth.menu()
+        booth.menu()
         # booth.shoot()
         # booth.bye()
 
