@@ -45,7 +45,7 @@ class Booth:
 
     def menu(self):
         print('Press Arcade Button to begin photo shoot.' + '\n')
-        with Board() as board, Leds() as leds:
+        with Board() as board, with PiCamera() as camera, Leds() as leds:
             while True:
                 # pulse LED to indicate ready state
                 leds.pattern = Pattern.blink(1000)
@@ -55,6 +55,7 @@ class Booth:
                 board.led.state = Led.ON
                 print('LED is on...')
                 # update LED to green indicating shoot is live
+                camera.start_preview()
                 leds.update(Leds.rgb_on((107, 255, 0)))
                 self.shoot()
                 leds.pattern = Pattern.blink(1000)
@@ -75,6 +76,7 @@ class Booth:
                     print('Photo booth session ran for ' +
                           str(sessionDuration.seconds) + ' seconds')
                     time.sleep(3)
+                    camera.stop_preview()
                     TonePlayer(22).play(*[
                         'D5e',
                         'rq',
@@ -96,7 +98,7 @@ class Booth:
 
             # Configure camera
             camera.resolution = (1640, 922)  # Full Frame, 16:9 (Camera v2)
-            camera.start_preview()
+            # camera.start_preview()
             leds.update(Leds.privacy_on())
 
             print('Get ready for your photo shoot!')
@@ -114,13 +116,13 @@ class Booth:
                 time.sleep(self.timing)
                 print('*** FLASH ***')
                 camera.capture(
-                    'photobooth_' + str(datetime.datetime.now()) + '.jpg')
+                    './photos/photobooth_' + str(datetime.datetime.now()) + '.jpg')
                 shots_remaining -= 1
             print('\n' + 'You looked FABULOUS!!!' + '\n')
             time.sleep(3)
             # Stop preview
-            camera.stop_preview()
-            leds.update(Leds.privacy_on())
+            # camera.stop_preview()
+            leds.update(Leds.privacy_off())
 
     def bye(self):
         byeScreen()
