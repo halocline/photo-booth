@@ -7,6 +7,8 @@ from aiy.board import Board, Led
 from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
 from aiy.toneplayer import TonePlayer
 
+from picamera import PiCamera
+
 from assets.songs import jingleBells
 from assets.cli_transitions import byeScreen, welcomeScreen
 
@@ -88,26 +90,37 @@ class Booth:
                 print('Done')
 
     def shoot(self):
-        countdown = self.initial_timing
-        shots_remaining = self.num_shots
+        with PiCamera() as camera, Leds() as leds:
+            countdown = self.initial_timing
+            shots_remaining = self.num_shots
 
-        print('Get ready for your photo shoot!')
-        time.sleep(3)
-        print('Starting in')
-        time.sleep(2)
-        while countdown > 0:
-            print(countdown)
-            countdown -= 1
+            # Configure camera
+            camera.resolution = (1640, 922)  # Full Frame, 16:9 (Camera v2)
+            camera.start_preview()
+            leds.update(Leds.privacy_on())
+
+            print('Get ready for your photo shoot!')
+            time.sleep(3)
+            print('Starting in')
+            time.sleep(2)
+            while countdown > 0:
+                print(countdown)
+                countdown -= 1
+                time.sleep(1)
             time.sleep(1)
-        time.sleep(1)
-        print('Smile :)')
-        while shots_remaining > 0:
-            # if shots_remaining != self.num_shots:
-            time.sleep(self.timing)
-            print('*** FLASH ***')
-            shots_remaining -= 1
-        print('\n' + 'You looked FABULOUS!!!' + '\n')
-        time.sleep(3)
+            print('Smile :)')
+            while shots_remaining > 0:
+                # if shots_remaining != self.num_shots:
+                time.sleep(self.timing)
+                print('*** FLASH ***')
+                camera.capture(
+                    'photobooth_' + str(datetime.datetime.now()) + '.jpg')
+                shots_remaining -= 1
+            print('\n' + 'You looked FABULOUS!!!' + '\n')
+            time.sleep(3)
+            # Stop preview
+            camera.stop_preview()
+            leds.update(Leds.privacy_on())
 
     def bye(self):
         byeScreen()
