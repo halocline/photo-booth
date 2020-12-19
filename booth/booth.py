@@ -55,6 +55,7 @@ class Booth:
                 board.led.state = Led.ON
                 print('LED is on...')
                 # update LED to green indicating shoot is live
+                # camera.start_preview()
                 leds.update(Leds.rgb_on((107, 255, 0)))
                 self.shoot()
                 leds.pattern = Pattern.blink(1000)
@@ -75,6 +76,7 @@ class Booth:
                     print('Photo booth session ran for ' +
                           str(sessionDuration.seconds) + ' seconds')
                     time.sleep(3)
+                    # camera.stop_preview()
                     TonePlayer(22).play(*[
                         'D5e',
                         'rq',
