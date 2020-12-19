@@ -47,6 +47,7 @@ class Booth:
         print('Press Arcade Button to begin photo shoot.' + '\n')
         with Board() as board, PiCamera() as camera, Leds() as leds:
             camera.start_preview()
+
             while True:
                 # pulse LED to indicate ready state
                 leds.pattern = Pattern.blink(1000)
@@ -89,6 +90,7 @@ class Booth:
                     ])
                     break
                 print('Done')
+
             camera.stop_preview()
 
     def shoot(self):
