@@ -97,18 +97,23 @@ class Booth:
             # Configure camera
             camera.resolution = (1640, 922)  # Full Frame, 16:9 (Camera v2)
             camera.start_preview()
-            leds.update(Leds.privacy_on())
+            # leds.update(Leds.privacy_on())
 
             print('Get ready for your photo shoot!')
             time.sleep(3)
             print('Starting in')
             time.sleep(2)
+            leds.pattern = Pattern.blink(1000)
+            leds.update(Leds.rgb_pattern(Color.RED))
             while countdown > 0:
                 print(countdown)
                 countdown -= 1
                 time.sleep(1)
             time.sleep(1)
+
             print('Smile :)')
+            leds.pattern = Pattern.blink(1000)
+            leds.update(Leds.rgb_pattern(Color.GREEN))
             while shots_remaining > 0:
                 # if shots_remaining != self.num_shots:
                 time.sleep(self.timing)
@@ -118,9 +123,11 @@ class Booth:
                 shots_remaining -= 1
             print('\n' + 'You looked FABULOUS!!!' + '\n')
             time.sleep(3)
+            leds.pattern = Pattern.blink(1000)
+            leds.update(Leds.rgb_pattern(Color.RED))
             # Stop preview
             camera.stop_preview()
-            leds.update(Leds.privacy_on())
+            # leds.update(Leds.privacy_on())
 
     def bye(self):
         byeScreen()
