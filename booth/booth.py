@@ -46,6 +46,7 @@ class Booth:
     def menu(self):
         print('Press Arcade Button to begin photo shoot.' + '\n')
         with Board() as board, PiCamera() as camera, Leds() as leds:
+            camera.start_preview()
             while True:
                 # pulse LED to indicate ready state
                 leds.pattern = Pattern.blink(1000)
@@ -55,7 +56,6 @@ class Booth:
                 board.led.state = Led.ON
                 print('LED is on...')
                 # update LED to green indicating shoot is live
-                camera.start_preview()
                 leds.update(Leds.rgb_on((107, 255, 0)))
                 self.shoot()
                 leds.pattern = Pattern.blink(1000)
@@ -76,7 +76,6 @@ class Booth:
                     print('Photo booth session ran for ' +
                           str(sessionDuration.seconds) + ' seconds')
                     time.sleep(3)
-                    camera.stop_preview()
                     TonePlayer(22).play(*[
                         'D5e',
                         'rq',
@@ -90,6 +89,7 @@ class Booth:
                     ])
                     break
                 print('Done')
+            camera.stop_preview()
 
     def shoot(self):
         with PiCamera() as camera, Leds() as leds:
