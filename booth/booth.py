@@ -96,7 +96,7 @@ class Booth:
 
             # Configure camera
             camera.resolution = (1640, 922)  # Full Frame, 16:9 (Camera v2)
-            # camera.start_preview()
+            camera.start_preview()
             leds.update(Leds.privacy_on())
 
             print('Get ready for your photo shoot!')
@@ -114,12 +114,12 @@ class Booth:
                 time.sleep(self.timing)
                 print('*** FLASH ***')
                 camera.capture(
-                    './photos/photobooth_' + str(datetime.datetime.now()) + '.jpg')
+                    'photobooth_' + str(datetime.datetime.now()) + '.jpg')
                 shots_remaining -= 1
             print('\n' + 'You looked FABULOUS!!!' + '\n')
             time.sleep(3)
             # Stop preview
-            # camera.stop_preview()
+            camera.stop_preview()
             leds.update(Leds.privacy_on())
 
     def bye(self):
