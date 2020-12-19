@@ -45,7 +45,7 @@ class Booth:
 
     def menu(self):
         print('Press Arcade Button to begin photo shoot.' + '\n')
-        with Board() as board, with PiCamera() as camera, Leds() as leds:
+        with Board() as board, PiCamera() as camera, Leds() as leds:
             while True:
                 # pulse LED to indicate ready state
                 leds.pattern = Pattern.blink(1000)
